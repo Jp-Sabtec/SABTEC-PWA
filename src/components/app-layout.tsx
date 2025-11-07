@@ -12,12 +12,10 @@ function AppLayoutContent({ children }: { children: React.ReactNode }) {
 
   return (
     <SidebarInset>
-      <header className="flex items-center justify-between p-4 border-b">
-         <div className={cn("flex items-center gap-2", {
-           "md:hidden": !showDesktopTrigger
-         })}>
-          <SidebarTrigger variant="ghost" size="icon" />
-        </div>
+      <header className="flex items-center p-4 border-b">
+        <SidebarTrigger variant="ghost" size="icon" className={cn({
+          "hidden md:flex": !showDesktopTrigger,
+        })} />
       </header>
       {children}
     </SidebarInset>
