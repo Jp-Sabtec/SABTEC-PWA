@@ -7,6 +7,7 @@ import {
   SidebarMenuItem,
   SidebarMenuButton,
   SidebarFooter,
+  SidebarTrigger,
 } from "@/components/ui/sidebar";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
@@ -33,7 +34,7 @@ const userAvatar = PlaceHolderImages.find((img) => img.id === "user-avatar");
 
 export function SidebarNav() {
   const pathname = usePathname();
-  const { state } = useSidebar();
+  const { state, isMobile } = useSidebar();
   
   const isCollapsed = state === "collapsed";
 
@@ -46,6 +47,7 @@ export function SidebarNav() {
           </div>
           <span className={cn("text-lg font-semibold", isCollapsed && "hidden")}>SabtecPWA</span>
         </div>
+        {!isMobile && <SidebarTrigger className="absolute right-2 top-3" />}
       </SidebarHeader>
       <SidebarContent className="p-2">
         <SidebarMenu>
