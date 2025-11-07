@@ -7,7 +7,6 @@ import {
   SidebarMenuItem,
   SidebarMenuButton,
   SidebarFooter,
-  SidebarTrigger,
 } from "@/components/ui/sidebar";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
@@ -33,7 +32,7 @@ const userAvatar = PlaceHolderImages.find((img) => img.id === "user-avatar");
 
 export function SidebarNav() {
   const pathname = usePathname();
-  const { isMobile, state } = useSidebar();
+  const { state } = useSidebar();
   
   return (
     <>
@@ -43,7 +42,6 @@ export function SidebarNav() {
             <Workflow className="w-6 h-6 text-primary-foreground" />
           </div>
           <span className="text-lg font-semibold">SabtecPWA</span>
-          <SidebarTrigger className="ml-auto" />
         </div>
       </SidebarHeader>
       <SidebarContent className="p-2">

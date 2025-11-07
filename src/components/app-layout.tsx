@@ -1,8 +1,28 @@
 "use client";
 
-import { Sidebar, SidebarProvider, SidebarInset, SidebarTrigger } from "@/components/ui/sidebar";
+import { Sidebar, SidebarProvider, SidebarInset, SidebarTrigger, useSidebar } from "@/components/ui/sidebar";
 import { SidebarNav } from "./sidebar-nav";
 import { usePathname } from "next/navigation";
+import { cn } from "@/lib/utils";
+
+function AppLayoutContent({ children }: { children: React.ReactNode }) {
+  const { state, isMobile } = useSidebar();
+  
+  const showDesktopTrigger = !isMobile && state === "collapsed";
+
+  return (
+    <SidebarInset>
+      <header className="flex items-center justify-between p-4 border-b">
+         <div className={cn("flex items-center gap-2", {
+           "md:hidden": !showDesktopTrigger
+         })}>
+          <SidebarTrigger variant="ghost" size="icon" />
+        </div>
+      </header>
+      {children}
+    </SidebarInset>
+  )
+}
 
 export function AppLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -16,12 +36,7 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
       <Sidebar collapsible="icon">
         <SidebarNav />
       </Sidebar>
-      <SidebarInset>
-        <header className="flex items-center justify-between p-4 md:hidden">
-          <SidebarTrigger variant="ghost" size="icon" />
-        </header>
-        {children}
-      </SidebarInset>
+      <AppLayoutContent>{children}</AppLayoutContent>
     </SidebarProvider>
   );
 }
