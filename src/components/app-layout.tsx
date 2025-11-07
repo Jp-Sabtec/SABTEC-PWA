@@ -6,16 +6,12 @@ import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 
 function AppLayoutContent({ children }: { children: React.ReactNode }) {
-  const { state, isMobile } = useSidebar();
+  const { isMobile } = useSidebar();
   
-  const showDesktopTrigger = !isMobile && state === "collapsed";
-
   return (
     <SidebarInset>
-      <header className="flex items-center p-4 border-b">
-        <SidebarTrigger variant="ghost" size="icon" className={cn({
-          "hidden md:flex": !showDesktopTrigger,
-        })} />
+      <header className="flex items-center p-4 border-b md:hidden">
+        <SidebarTrigger />
       </header>
       {children}
     </SidebarInset>
