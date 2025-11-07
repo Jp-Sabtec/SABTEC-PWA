@@ -24,7 +24,7 @@ import {
 import { useSidebar } from "./ui/sidebar";
 
 const navItems = [
-  { href: "/", label: "Calendar", icon: CalendarDays },
+  { href: "/dashboard", label: "Calendar", icon: CalendarDays },
   { href: "/timesheet", label: "Timesheet", icon: Clock3 },
   { href: "/leave", label: "Leave", icon: Plane },
 ];

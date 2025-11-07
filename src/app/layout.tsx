@@ -6,6 +6,7 @@ import { Toaster } from '@/components/ui/toaster';
 export const metadata: Metadata = {
   title: 'SabtecPWA',
   description: 'SabtecPWA for timesheets and leave management.',
+  manifest: '/manifest.json',
 };
 
 export default function RootLayout({
@@ -19,9 +20,10 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
+        <meta name="theme-color" content="#f4f4f5" />
       </head>
       <body className="font-body antialiased">
-        <AppLayout>{children}</AppLayout>
+        {children}
         <Toaster />
       </body>
     </html>
