@@ -33,7 +33,7 @@ const userAvatar = PlaceHolderImages.find((img) => img.id === "user-avatar");
 
 export function SidebarNav() {
   const pathname = usePathname();
-  const { isMobile } = useSidebar();
+  const { isMobile, state } = useSidebar();
   
   return (
     <>
@@ -43,7 +43,7 @@ export function SidebarNav() {
             <Workflow className="w-6 h-6 text-primary-foreground" />
           </div>
           <span className="text-lg font-semibold">SabtecPWA</span>
-          {isMobile && <SidebarTrigger className="ml-auto" />}
+          <SidebarTrigger className="ml-auto" />
         </div>
       </SidebarHeader>
       <SidebarContent className="p-2">
