@@ -7,7 +7,6 @@ import {
   SidebarMenuItem,
   SidebarMenuButton,
   SidebarFooter,
-  SidebarTrigger,
 } from "@/components/ui/sidebar";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
@@ -22,6 +21,7 @@ import {
   LogOut,
 } from "lucide-react";
 import { useSidebar } from "./ui/sidebar";
+import { cn } from "@/lib/utils";
 
 const navItems = [
   { href: "/dashboard", label: "Calendar", icon: CalendarDays },
@@ -33,17 +33,18 @@ const userAvatar = PlaceHolderImages.find((img) => img.id === "user-avatar");
 
 export function SidebarNav() {
   const pathname = usePathname();
-  const { isMobile } = useSidebar();
+  const { state } = useSidebar();
   
+  const isCollapsed = state === "collapsed";
+
   return (
     <>
       <SidebarHeader>
         <div className="flex items-center gap-2">
-          <div className="p-1.5 rounded-lg bg-primary">
-            <Workflow className="w-6 h-6 text-primary-foreground" />
+          <div className={cn("p-1.5 rounded-lg bg-primary", isCollapsed && "p-2")}>
+            <Workflow className={cn("w-6 h-6 text-primary-foreground", isCollapsed && "w-4 h-4")} />
           </div>
-          <span className="text-lg font-semibold">SabtecPWA</span>
-          {isMobile && <SidebarTrigger className="ml-auto" />}
+          <span className={cn("text-lg font-semibold", isCollapsed && "hidden")}>SabtecPWA</span>
         </div>
       </SidebarHeader>
       <SidebarContent className="p-2">
@@ -65,7 +66,7 @@ export function SidebarNav() {
         </SidebarMenu>
       </SidebarContent>
       <SidebarFooter>
-        <div className="flex items-center gap-3 p-2 rounded-lg bg-sidebar-accent">
+        <div className={cn("flex items-center gap-3 p-2 rounded-lg", isCollapsed ? "justify-center" : "bg-sidebar-accent")}>
           <Avatar className="h-10 w-10">
             <AvatarImage
               src={userAvatar?.imageUrl}
@@ -74,7 +75,7 @@ export function SidebarNav() {
             />
             <AvatarFallback>JD</AvatarFallback>
           </Avatar>
-          <div className="flex flex-col">
+          <div className={cn("flex flex-col", isCollapsed && "hidden")}>
             <span className="font-semibold">John Doe</span>
             <span className="text-xs text-muted-foreground">john.doe@sabtec.com</span>
           </div>
